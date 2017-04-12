@@ -1,41 +1,21 @@
-// version 1.0.0.1
+(function(){
 angular.module('rasm-tracker',['ngMdIcons']) 
-	.directive('timeTracker',timeTracker);
+    .directive('timeTracker',timeTracker);
 
 function timeTracker(){
     var directive= {
-        restrict: 'E'
-        , template: `<div flex="25">
-                       <md-card>
-                          <md-card-content  style="background-color: rgba(0, 0, 0, 0.09);cursor: move;">
-                             <div>
-                                <label style="font-size: 16px;position: relative;top: -4px;">{{vm.timeStatus | timerFilter }}</label>  
-                                <md-button ng-show="vm.startButton" type="button" class="md-icon-button" ng-click="vm.startTimer()" autofocus>
-                                    <ng-md-icon icon="play_arrow" size="22"></ng-md-icon>
-                                   <md-tooltip>Start</md-tooltip>
-                                </md-button>
-                                <md-button ng-show="vm.pauseButton" type="button" class="md-icon-button" ng-click="vm.pauseTimer()" >
-                                    <ng-md-icon icon="pause" size="22"></ng-md-icon>
-                                    <md-tooltip>Pause</md-tooltip>
-                                </md-button>
-                                <md-button ng-show="vm.stopButton" type="button" class="md-icon-button" ng-click="vm.stopTimer()" >
-                                    <ng-md-icon icon="stop" size="22"></ng-md-icon>
-                                    <md-tooltip>Stop</md-tooltip>
-                                </md-button>
-                                <md-button type="button" class="md-icon-button" ng-click="vm.resetTimer()">
-                                   <ng-md-icon icon="autorenew" size="22"></ng-md-icon>
-                                   <md-tooltip>Reset</md-tooltip>
-                                </md-button>
-                             </div>
-                             <div ></div>
-                          </md-card-content>
-                       </md-card>
-                    </div>`
-        , controller: timeTrackerCtrl
-        , controllerAs : 'vm'
-        , scope: {
+        'restrict': 'E',
+        'template': '<div flex="25"><md-card><md-card-content style="background-color:rgba(0,0,0,0.09);cursor:move"><div><label style="font-size:16px;position:relative;top:-4px">{{vm.timeStatus | timerFilter }}</label><md-button ng-show="vm.startButton" type="button" class="md-icon-button" ng-click="vm.startTimer()" autofocus><ng-md-icon icon="play_arrow" size="22"></ng-md-icon><md-tooltip>Start</md-tooltip></md-button><md-button ng-show="vm.pauseButton" type="button" class="md-icon-button" ng-click="vm.pauseTimer()"><ng-md-icon icon="pause" size="22"></ng-md-icon><md-tooltip>Pause</md-tooltip></md-button><md-button ng-show="vm.stopButton" type="button" class="md-icon-button" ng-click="vm.stopTimer()"><ng-md-icon icon="stop" size="22"></ng-md-icon><md-tooltip>Stop</md-tooltip></md-button><md-button type="button" class="md-icon-button" ng-click="vm.resetTimer()"><ng-md-icon icon="autorenew" size="22"></ng-md-icon><md-tooltip>Reset</md-tooltip></md-button></div><div></div></md-card-content></md-card></div>'
+        , 'controller': timeTrackerCtrl
+        , 'controllerAs' : 'vm'
+        , 'scope': {
             config: '=',
-            stopFunc : '&'
+        },
+        'bindToController' : {            
+            stopFunc : '&',
+            startFunc : '&',
+            pauseFunc : '&',
+            resetFunc : '&'
         }
     }
     return directive;            
@@ -59,13 +39,15 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
         vm.initCatch();
     }, 1000);
 
+
+    if (!vm.config || !vm.config.cacheName) {
+        vm.config = {'cacheName': "defaultCache"}
+    }
+
     vm.initCatch = function () {
-        if (!vm.config || !vm.config.cacheName) {
-            vm.config = {'cacheName': "default"}
-        }
         if (localStorage.getItem(vm.config.cacheName)) {
             vm.remainTime = localStorage.getItem(vm.config.cacheName);
-            console.log(JSON.parse(vm.remainTime));
+            //console.log(JSON.parse(vm.remainTime));
             var arr = JSON.parse(vm.remainTime);
             if (vm.remainTime) {
                 vm.startButton = false;
@@ -76,7 +58,7 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
                 vm.timeDiff = new Date()
                     .getTime() - new Date(strtTime)
                     .getTime();
-                console.log((vm.timeDiff))
+                //console.log((vm.timeDiff))
                 vm.timeStatus = vm.timeDiff / 10;
                 runTimer();
             };
@@ -90,24 +72,24 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
             if (localStorage.getItem(vm.config.cacheName)) {
                 var arr = localStorage.getItem(vm.config.cacheName);
                 var jsonArr = JSON.parse(arr);
-                console.log(JSON.stringify(jsonArr))
+                //console.log(JSON.stringify(jsonArr))
                 localStorage.setItem(vm.config.cacheName, JSON.stringify(jsonArr));
             }
         }
     }
 
     window.addEventListener("focus", function (event) {
-        console.log("focus")
+        //console.log("focus")
         vm.initCatch();
     });
 
     window.addEventListener("blur", function (event) {
-        console.log("blur")
+        //console.log("blur")
         saveToCatch();
     });
 
     window.addEventListener("beforeunload", function (e) {
-        console.log("close working")
+        //console.log("close working")
         saveToCatch();
     });
 
@@ -125,6 +107,7 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
             localStorage.setItem(vm.config.cacheName, JSON.stringify(testObject));
         };
         runTimer();
+        vm.startFunc({time: vm.timeStatus/ 100})
     }
 
     vm.pauseTimer = function () {
@@ -134,9 +117,9 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
         if (vm.timeRun) {
             $interval.cancel(vm.timeRun);
             vm.startTime = vm.timeStatus;
-        }
-        console.log(vm.timeStatus / 100);
+        } 
         vm.result = vm.timeStatus;
+        vm.pauseFunc({time: vm.timeStatus/ 100});
     }
 
     function runTimer() {
@@ -161,9 +144,9 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
             $interval.cancel(vm.timeRun);
             vm.startTime = vm.timeStatus;
         }
-        console.log(vm.timeStatus / 100);
+        //console.log(vm.timeStatus / 100);
         vm.result = vm.timeStatus;
-        $scope.stopFunc({time: vm.timeStatus/ 100});
+        vm.stopFunc({time: vm.timeStatus/ 100});
         vm.timeStatus = 0;
     }
 
@@ -174,6 +157,7 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
         if (window.localStorage) {
             localStorage.removeItem(vm.config.cacheName);
         };
+        vm.resetFunc({time: vm.timeStatus/ 100});
         vm.timeStatus = 0;
         vm.laps = [];
         $interval.cancel(vm.timeRun);
@@ -182,8 +166,6 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
     vm.lapTimer = function () {
         //console.log("Start Time 0: " + vm.startTime);
         vm.lapTime = vm.timeStatus - vm.startTime;
-        //console.log("Status Time : " + vm.timeStatus);
-        //console.log(vm.lapTime + " = " + vm.timeStatus + " - " +  vm.startTime);
         vm.startTime = vm.timeStatus;
         vm.laps.push(vm.lapTime);
     }
@@ -202,7 +184,7 @@ function timeTrackerCtrl($scope, $interval, $timeout, $window){
 };
 
 angular.module('rasm-tracker')
-	.filter('timerFilter',timerFilter);
+    .filter('timerFilter',timerFilter);
 
 timerFilter.$inject = [];
 
@@ -241,4 +223,5 @@ angular.module('rasm-tracker')
 
             }
         };
-    }
+    };
+})();

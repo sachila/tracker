@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div ng-app="app" ng-controller="ctrl as vm"> 
-	    <time-tracker drag-tracker config="vm.config"  stop-func="vm.stopF(time)"></time-tracker> 
+	<time-tracker drag-tracker  stop-func="vm.stopF(time)"  start-func="vm.startF(time)" reset-func="vm.resetF(time)" pause-func="vm.pauseF(time)"></time-tracker> 
 	</div>
 </body>
 </html>

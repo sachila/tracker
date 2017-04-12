@@ -1,6 +1,6 @@
 {
   "name": "material-time-tracker",
-  "version": "1.1.1",
+  "version": "1.1.3",
   "authors": [
     "sachilaranawaka <sachilaranawaka@gmail.com>"
   ],
@@ -12,7 +12,7 @@
     "material tracker"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/sachila/tracker",
   "ignore": [
     "**/.*",
     "node_modules",

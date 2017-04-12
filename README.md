@@ -69,7 +69,27 @@ current time pass as argument to the function.
 	}
 })
 ```
+- stop event
 
+same as start event. just add `stop-func` to the element 
+```html 
+ <time-tracker stop-func="vm.stopF(time)"></time-tracker> 
+``` 
+
+
+- reset event
+
+same as start event. just add `reset-func` to the element 
+```html 
+ <time-tracker reset-func="vm.resetF(time)"></time-tracker> 
+``` 
+
+- pause event
+
+same as start event. just add `pause-func` to the element 
+```html 
+ <time-tracker pause-func="vm.pauseF(time)"></time-tracker> 
+``` 
 
 
 

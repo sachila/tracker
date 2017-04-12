@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">  
+
+
+
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="bower_components/angular-aria/angular-aria.js"></script>
+	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script> 
+	<script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
+	<script type="text/javascript" src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+	<script type="text/javascript" src="tracker-module/tracker-module.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+	<div ng-app="app" ng-controller="ctrl as vm"> 
+	    <time-tracker drag-tracker config="vm.config"  stop-func="vm.stopF(time)"></time-tracker> 
+	</div>
+</body>
+</html>

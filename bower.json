@@ -1,0 +1,29 @@
+{
+  "name": "material-time-tracker",
+  "authors": [
+    "sachilaranawaka <sachilaranawaka@gmail.com>"
+  ],
+  "description": "angular material time tracker",
+  "main": "tracker-module.js",
+  "keywords": [
+    "time",
+    "tracker"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "1.5.7",
+    "angular-aria": "^1.4.8",
+    "angular-messages": "^1.4.8",
+    "jquery-ui": "^1.12.1",
+    "angular-material-icons": "^0.7.1",
+    "angular-material": "1.1.0-rc.5"
+  }
+}

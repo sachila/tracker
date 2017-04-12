@@ -52,7 +52,8 @@ in the html add tracker as element like this
 
 There are couple of events available in time tracker
 
-- start event 
+- start event
+
 add `start-func` as attribute to the element and call controller function
 
 ```html 

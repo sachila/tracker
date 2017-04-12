@@ -44,8 +44,29 @@ in the html add tracker as element like this
 
 ```html
 <div ng-app="app" ng-controller="ctrl as vm"> 
-	  <time-tracker ></time-tracker> 
+	<time-tracker></time-tracker> 
 </div>
+```
+
+### Events
+
+There are couple of events available in time tracker
+
+- start event 
+add `start-func` as attribute to the element and call controller function
+
+```html 
+ <time-tracker start-func="vm.startF(time)"></time-tracker> 
+``` 
+current time pass as argument to the function.
+
+```js
+.controller("ctrl",function($scope){
+	var vm = this;
+	vm.startF = function(time){
+	   console.log("start time " + time)
+	}
+})
 ```
 
 

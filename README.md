@@ -91,7 +91,7 @@ same as start event. just add `pause-func` to the element
  <time-tracker pause-func="vm.pauseF(time)"></time-tracker> 
 ``` 
 
-##Draggable
+## Draggable
 
 in ordert to drag the time tracker, First of all we need to add jquery libraries. Add these scripts to your application.
 
@@ -102,7 +102,10 @@ in ordert to drag the time tracker, First of all we need to add jquery libraries
 
 Then add the `drag-tracker` attribute to the tracker 
 
+```html
 <time-tracker drag-tracker  stop-func="vm.stopF(time)"  start-func="vm.startF(time)" reset-func="vm.resetF(time)" pause-func="vm.pauseF(time)"></time-tracker> 
+```
+
 
 
 

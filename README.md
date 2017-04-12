@@ -8,6 +8,11 @@ simple angular material time tracker
  - Angular Material icon
  - jquery ui
  
+ ## Installing
+ install the `tracker-module` using bower 
+ 
+ `bower install time-tracker`
+ 
  ### Add files
 
 Add the scripts to your application. Make sure the `tracker-module.js` file is inserted **after** the `angular.js` library:

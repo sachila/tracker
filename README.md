@@ -106,6 +106,10 @@ Then add the `drag-tracker` attribute to the tracker
 <time-tracker drag-tracker  stop-func="vm.stopF(time)"  start-func="vm.startF(time)" reset-func="vm.resetF(time)" pause-func="vm.pauseF(time)"></time-tracker> 
 ```
 
+## License
+
+See the [LICENSE](https://github.com/sachila/tracker/blob/master/License.md) file.
+
 
 
 

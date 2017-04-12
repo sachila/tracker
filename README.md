@@ -37,6 +37,17 @@ Add the time tracker module as a dependancy to your application module. since an
 ```js
 angular.module("app",['ngMaterial','ngAnimate', 'ngAria','rasm-tracker'])
 ```
- 
+
+### basic tracker 
+
+in the html add tracker as element like this 
+
+```html
+<div ng-app="app" ng-controller="ctrl as vm"> 
+	  <time-tracker ></time-tracker> 
+</div>
+```
+
+
 
 

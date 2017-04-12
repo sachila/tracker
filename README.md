@@ -29,6 +29,14 @@ Add the scripts to your application. Make sure the `tracker-module.js` file is i
 <script type="text/javascript" src="bower_components/material-time-tracker/tracker-module/tracker-module.js"></script>
  
 ```
+
+### Add a dependancy
+
+Add the time tracker module as a dependancy to your application module. since angular material beign used inject the `ngAnimate` and `ngAria` modules along with the `ngMaterial` module:
+
+```js
+angular.module("app",['ngMaterial','ngAnimate', 'ngAria','rasm-tracker'])
+```
  
 
 
